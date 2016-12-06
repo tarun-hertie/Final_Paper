@@ -1,0 +1,387 @@
+---
+title: "MPP-E1180: Collaborative Social Data Analysis Assignment 3"
+author: "Camila Vieira & Tarun Khanna"
+date: "11 November 2016"
+output: pdf_document
+graphics: yes
+bibliography: 
+        - bibliography.bib
+        - RpackageCitations.bib
+---
+
+#Determinants of Renewable Energy Investments: An EU Cross-Country Analysis
+
+## Introduction
+
+Climate change imposes real challenges to societies' environmental and economic wellbeing. This state of affairs urges us to think on ways to cope with the effects of climate change as well as finding potential alternatives to the roots of this human-caused phenomenon. Consequently, this pressure has put into question the traditional energy sources in use which have contributed to high levels of pollution and greenhouse gas emissions worldwide. Two thirds of total carbon dioxide emissions in the world come from the energy sector and their effect on human livelihood is increasingly negative. There are two potential ways of offsetting the impact of such emissions - adaptation and mitigation. While adaptation refers to the efforts to limit human exposure to climate change, mitigation is related to human activities intended to reduce the magnitude of climate change and its impact on human life. Mitigation further involves a two-fold strategy - reduction of carbon dioxide emissions through efficiency gains in energy consumption and production, and the shift to other, cleaner forms of energy production through the adoption of alternative sources.
+
+Renewable energy adoption constitutes a means to deal with this challenge and renewable energy sources have been increasingly adopted worldwide for being a consistent way of improving energy efficiency by reducing energy consumption levels. Recent studies of @eyraud2011s and @del2014determinants identified that renewable energy sources will be the key drivers of the energy sector in coming years. Our main goal with this research project is to identify what are the determinants of renewable energy, namely wind and solar electricity, across European countries and to what extend factors, such as income, changes in fuel prices, and interest rates have a significant impact on prospects of green energy. 
+
+##Literature Review
+
+@romano2011investments analyzes the driving of investments in renewable energy sources in low carbon and high carbon economies. This author argues that there are different ways of assessing the development of renewable energy sources in the literature. One method is to measure the replacement of traditional energy sources in the total energy supply while the other way which is also mentioned by @bird2005policies is to measure the total amount of renewable enegy produced. Each of those approaches were used by @marques2010motivations and @carley2009state. Marques et al. use the contribution of renewable to energy supply as a percentage of
+total primary energy supply while Carley focuses on the yearly electricity generation from renewable energy sources.
+
+By adopting Carley's approach, @romano2011investments conducted a dynamic panel analysis of the investments in renewable sources from 1980 to 2008 in a sample of 29 countries with distinct economic and social structures as well as different levels of economic development. The results of this study show that there is a continuity of
+investment behavior in those countries that have shown sensitivity towards renewable energy sources. Moreover, it shows that countries with traditionally stable high income tend to show more attention to technologies with lower environmental impact and improved energy efficiency in comparison with fast-growing countries. Authors also concluded that the presence of nuclear power plants, for example, may affect investments in renewable energy sources.
+
+Another interesting study on green investments was conducted by @ilas2014macroeconomic. The increasing importance of generating cleaner energy as a mitigation measure led the IMF to publish a article in its 2013 Energy Policy Journal containing explanation and trend analysis of the green investments. This research articles served as a bases for @ilas2014macroeconomic study on the factors affecting green investments at an international level in which the authors analyzed macroeconomic and political factors in different types of investment in green technologies, including low-emission energy supply, energy efficiency in energy-consuming sectors, and carbon sequestration, in 35 countries from 2000 to 2012. The analysis demonstrated that GDP per capita has a positive impact over investments in green technologies, while GDP growth and variables related to human development capacity as well as technological progress were both statistically insignificant.
+
+Taking into account those previous studies we now aim to verify the determinants of green energy across the 28 countries of the European Union between 2005 and 2013 by adopting a panel data approach. The impact of those determinants on wind and solar energy development will be estimated in real terms using fixed effects methodology.
+
+## Data Description
+
+### Dependent Variable
+
+We use electricity generation from Renewable Energy Sources (RES), namely wind and solar, to operationalise the variable of our interest - renewable energy capacity in the economy. Increase in renewable energy generation is expected to be correlated strongly with the underlying generation capacity as it is relatively uneffected by demand side fluctuation. Generation from RES enjoys the first right in most countries and is therefore rarely backed down. The increase in generation capacity is also indicative of the investments in renewable energy. 
+
+The data on this variable is taken from the Eurostat database. The electricity generated is expressed in terawatt hour. 
+
+### Explanatory Variables and Hypotheses
+
+####Source 1: World Bank - World Development Indicators 
+
+*GDP per capita (constant 2000 US$)*
+
+Definition: Gross domestic product divided by midyear population
+.
+Hypothesis: GDP per capita has an important and positive impact on green investment.  They generate a higher demand for energy and clean air. Here GDP per capita is kept constant to correct for domestic inflation and exchange rate fluctuations. 
+
+*Energy imports, net (% of energy use)*
+
+Definition: Net energy imports are estimated as energy use less production, both measured in oil equivalents. Energy use refers to use of primary energy before transformation to other end-use fuels, which is equal to indigenous production plus imports and stock changes, minus exports and fuels supplied to ships and aircraft engaged in international transport.
+
+Hypothesis: The energy imports indicator allows us to verify whether countries have reduced dependence on energy sources from other countries by producing more electricity through its own sources. However, if a country presents a negative value it indicates that the country is a net exporter. We expect that a higher energy imports value increases the likelihood of countries to use electricity generated locally via wind and solar energy sources. 
+
+####Source 2: Eurostat
+
+*Innovation in Renewable Energy*
+
+Definition: Number of patents filed for renewable energy/climate mitigation country wise. It comprises energy technologies patent applications submitted to the European Patent Office.
+
+Hypothesis: The number of patent applications in renewable energy is used as a proxy for innovation levels having a positive impact on investments in renewable resources. 
+
+*Long-term interest rate (10 ys. maturity)*
+
+Definition: Interest rates affect the capital available for investment. Changes in interest rates may impact costs related to access to finance as well as the return on investments. As the realisation of investments especially those related to infrastructure occurs in the long-run, a ten-year maturity interest rate is used in this analysis. The indicator chosen for this study is the Maastricht criterion bond yields which is used as a convergence criterion for EMU for long-term interest rates (central government bond yields on the secondary market, gross of tax, with around 10 years' residual maturity).
+
+Hypothesis:  Higher interest rates imply that business will have less incentives to invest in renewable sources whereas lower interest rates foster long-term investments, and therefore higher generation from RES. In addition, higher interest rates may also increase the costs associated with the generation of electricity from renewable energy sources. 
+
+####Source 3: OPEC
+
+*Crude oil prices*
+
+Definition: Crude oil prices represent annual averages of selected OPEC crude oils (OPEC basket).
+The benchmark for crude oil price is the OPEC Reference Basket. This basket represents the average of prices of petroleum blends produced by OPEC members. Some of these oil blends include, for example, the Saharan Blend from Algeria, Arab Light from Saudi Arabia, BCF 17 from Venezuela, et cetera. OPEC tries to keep the price between given maxima and minima by increasing and decreasing its oil production. 
+
+Hypothesis: Crude oil prices can be used as proxy for the demand of energy from fossil fuels. One can assume that a higher price of fossil fuel is positively correlated with investments in renewable energy sources and changes in prices may reveal trends in energy production and consumption. In this sense, we hypothesize that a higher price in crude oil means higher demand, or at least, scarcer availiability of fossil fuels in general, and therefore, it may produce an incentive for countries to invest in renewable energy sources. 
+
+## Descriptive Statistics
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
+
+# Importing and cleaning data from Eurostat
+source('Eurostat_and_Opec_data.R')
+
+# Importing and cleaning data from World Bank
+source('WDI_data.R')
+
+# Merging the data
+re_data <- merge(Combined_WDI,Combine_EuroStat,by = c("country", "year"), all.x = T, all.y = T)
+
+# Remove missing values
+re_data1 <- na.omit(re_data)
+
+#creating var for solar and wind gen as percent of total elec consumption
+re_data1$sw_pc_elec <- re_data1$re_gen/re_data1$elec_total*100 
+
+
+```
+
+The generation from wind energy has been increasing every year in EU countries. The graph below shows wind energy generation in the leading ten wind energy generating markets in EU. Germany has been a leader in wind energy development - this is clearly seen in its large share of overall wind generation. Apart from Germany, Spain and increasingly UK and France are also important players in this market. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+# Data visualisation
+library(ggplot2)
+library(dplyr)
+
+#selecting data for wind
+re_data1 <- re_data1[order(re_data1$year,re_data1$wind_gen),] #arranging data
+countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+re_wind_top10  <- filter(re_data, grepl(countries10, country)) #selecting top 10 countries by generation 
+
+#create graph of Wind Generation
+Colours <- c('#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3','#c7eae5','#80cdc1',
+             '#35978f','#01665e','#003c30') # assigning colour pallette
+
+ggplot(data = na.omit(re_wind_top10)) + 
+  aes(x = year, y = wind_gen, group = country, fill = country) +
+  geom_area(position = "stack") + 
+  scale_color_manual(values = Colours) +
+  xlab("\nYear") +
+  ylab("Wind Energy Generation(TWh)\n") +
+  ggtitle("Wind Energy Generation in ten largest wind energy markets in Europe\n") +
+  theme_bw(base_size = 10)
+
+rm(list = c("re_wind_top10", "countries10"))
+
+```
+
+The solar energy generation scenario is quite different. The solar industry was relatively small in up to 2009. Since then it has grown very quickly. The graph below shows solar energy generation in the leading ten solar energy generating markets in EU. Germany again is a consistent leader. Spain and Italy are also important solar energy markets and have seen rapid increase in solar electricity generation since 2010. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+#selecting data for solar
+re_data1 <- re_data1[order(re_data1$year,re_data1$solar_gen),] #arranging data
+countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+re_solar_top10  <- filter(re_data, grepl(countries10, country)) #selecting top 10 countries by generation 
+
+#create graph of Solar Generation
+ggplot(data = na.omit(re_solar_top10)) + 
+  aes(x = year, y = solar_gen, group = country, fill = country) +
+  geom_area(position = "stack") + 
+  scale_color_manual(values = Colours) +
+  xlab("\nYear") +
+  ylab("Solar Energy Generation (TWh)\n") +
+  ggtitle("Solar Energy Generation in ten largest solar energy markets in Europe\n") +
+  theme_bw(base_size = 10)
+
+rm(list = c("re_solar_top10", "countries10","p","countries","Colours"))
+
+```
+
+As expected, development of renewable energy seems to be linked to income levels but the relationship is not linear. Countries in the highest quartile of income are not the ones with highest level of RES generation. Countries in the third income quartile display the highest level of RES generation. In line with theoretical expectation though, countries in the lowest income quartile show have the lowest level of RES generation. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+# create GDP_indicator
+#p <- summary(re_data1$GDP_capita) %>% as.matrix(.) %>% as.character() %>% paste(collapse = ",")
+#summary(re_data$GDP_capita)
+re_data1$GDP_ind <- cut(re_data1$GDP_capita, c(5544, 13800, 30780, 45730, 110000), labels = c("<13k", "13k-30k", "30k-45k", "45k-110k"))
+
+# create graph
+Colours <- c("#1B9E77", "#D95F02", "#7570B3",
+             "#E7298A", "#66A61E", "#E6AB02")
+ggplot(data = re_data1,
+                    aes(GDP_capita,re_gen)) +
+        geom_jitter(aes(colour = GDP_ind)) +
+        scale_color_manual(values = Colours) +
+        xlab("\nGDP per capita (USD)") +
+        ylab("RE Generation (TWh)\n") +
+        ggtitle("Renewable Energy generation by income group\n") +
+        theme_bw(base_size = 10)
+
+```
+
+We also examine the pace of technological innovation in green energy in EU countries. We estimate the pace of innovation across countries of the EU by looking at the number of patent applications submitted to the EPO. A relevant patent is a key element for investing in the sector, which may include the ability of business to get access to finance to introduce those technologies in the market. 
+
+We categorize the countries into Leaders, Fast Innovators, Medium Innovators and Slow Innovators; the Leaders correspond to the countries in the highest quintile by the number of patents filed and the Slow Innovators lie in the lowest quintile. As expected, we indeed see that countries that are innovation Leaders also have high levels of RES activity. 
+
+```{r include=T, message=F, echo=FALSE, warning=FALSE, error=FALSE}
+
+#Selecting data
+re_data1$patent_ind <- cut(re_data1$patents, c(-1, 3.587, 14.950, 103.000, 1018.008), 
+                           labels = c("Slow Innovators", "Medium Innovators","Fast Innovators", "Leaders"))
+
+# create graph
+ggplot(re_data1, aes(patent_ind, re_gen)) + geom_jitter(aes(colour = patent_ind)) +
+  xlab("\n") +
+  ylab("RE Generation (TWh)\n") +
+  ggtitle("Renewable Energy generation and innovation in EU Countries\n") +
+  theme_bw(base_size = 10)
+
+```
+
+But we see that countries in the middle are at least catching up. Between 2005 and 2013, the biggest percentage increase in the number of patents is seen in the so-called Medium Innovators, which means that business in those countries may have found business opportunities through those new technologies. Moreover, countries who are considered Leaders in innovation have not been able to keep maintain the pace of innovation. In that sense, we may think that business from medium innovator countries might have gained some competitive advantage in comparison with leading innovators.
+
+```{r include=T, message=F, echo=FALSE, warning=FALSE, error=FALSE}
+
+# create graph
+pct_change <-re_data1 %>%
+        transform(year = as.numeric(year)) %>%
+        filter(year == 2005 | year == 2013) %>%
+        group_by(patent_ind, year) %>%
+        dplyr::summarise(average = mean(patents)) %>%
+        ungroup() %>%
+        group_by(patent_ind) %>%
+        mutate(pct = average / lag(average) - 1) %>%
+        filter(year == 2013) 
+
+ggplot(pct_change, aes(patent_ind,pct)) + geom_bar(stat="identity", fill = "#1B9E77") + theme_bw(base_size = 10) + labs(y='% change', title= "% Change in number of patents filed between 2005 and 2013")
+
+```
+
+As regards to the effect of energy imports on renewable energy develpment, looking at aggregate data there does not seem to be any clear relationship between energy imports and renewable energy generation. Except for a few countries which have moderate level of energy imports and are also doing well in terms of RES generation, there does not seem to be a distict relationship. A graph of the top 10 RES energy producers shows that these countries have energy intesity varying between 20 percent and 80 percent. 
+
+```{r include=T, message=F, echo=FALSE, warning=FALSE, error=FALSE}
+
+# create graph
+ggplot(re_data1, aes(netenergy_imports, re_gen)) + geom_point(aes(colour = country)) +
+      theme_bw(base_size = 10) +
+  xlab("\n Energy Intensity(%)") +
+  ylab("RE Generation (TWh)\n") +
+  ggtitle("Renewable Energy generation and Energy Intensity\n") +
+  theme_bw(base_size = 10)
+
+# create graph for top 10
+re_data1 <- re_data1[order(re_data1$year,re_data1$re_gen),] #arranging data
+countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+re_top10  <- filter(re_data, grepl(countries10, country)) #selecting top 10 countries by generation 
+
+ggplot(re_top10, aes(netenergy_imports, re_gen)) + geom_point(aes(colour = country)) +
+      theme_bw(base_size = 10)+
+  xlab("\n Energy Intensity (%)") +
+  ylab("RE Generation (TWh)\n") +
+  ggtitle("\nRenewable Energy generation and Energy Intensity for top 10\n") +
+  theme_bw(base_size = 10)
+
+rm(list = c("re_top10"))
+
+
+```
+
+##Models 
+
+A pooled OLS regression was run with total renewable energy generation as the dependent variable. We take a log of the variable GDP per capita to reduce the skewness in the data. A polynomial transformation was added for the variable patents to take into account the non linear relationship between innovation and RE generation. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+library(plm) #for panel data
+library(ggplot2) #for graphs using ggplot
+
+# estimate pooled OLS model
+m.pols  <- plm(sw_pc_elec  ~ log(GDP_capita) + netenergy_imports + interest_rate +  oil_price + poly(patents,3), data= re_data1, index=c("country", "year"), model="pooling")
+summary(m.pols)
+
+#re_data2 <- re_data1[-which(re_data1$country == "Luxembourg"),]
+
+# estimate panel fixed effects 
+m.fe  <- plm(sw_pc_elec ~ log(GDP_capita) + netenergy_imports  + interest_rate +  oil_price + patents, data= re_data1, index=c("country", "year"), model="within")
+summary(m.fe)
+
+m.lsdv <- lm(sw_pc_elec ~ log(GDP_capita) + netenergy_imports  + interest_rate +  oil_price + patents + as.factor(country), data= re_data1)
+summary(m.lsdv)
+
+#re_data2 <- re_data1[-which(re_data1$country == "Luxembourg"),]
+#m.fe1  <- plm(re_gen  ~ log(GDP_capita) + netenergy_imports  + interest_rate +  oil_price + poly(patents,3), data= re_data2, index=c("country", "year"), model="within")
+#summary(m.fe1)
+
+library(sjPlot)
+library(sjmisc)
+
+# graphs for presentation
+sjp.lm(m.fe, theme_bw()) # plotting coeffificents on graph
+sjp.lm(m.pols, type = "poly", poly.term = 'patents', theme_bw(base_size = 10) # poltting the polynomial variables
+
+# Explaining why GDP per Capita does not work
+
+re_data1 <- re_data1[order(re_data1$year,re_data1$sw_pc_elec),] #arranging data
+countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding 
+top10sw_pc_elec_top10  <- filter(re_data1, grepl(countries10, country)) #selecting top 10 countries by generation 
+
+ggplot(data = re_wind_top10) + 
+  aes(x = year, y = GDP_capita, colour = country, group = country ) +
+  geom_line() + 
+  xlab("\nYear") +
+  ylab("GDP per capita ('000 USD\n") +
+  ggtitle("GDP per capita declined in several countries b/w 2005 and 2013\n") +
+  theme_bw(base_size = 10)       
+
+```
+
+```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, results='asis'}
+
+# creating coeff table
+library(stargazer)  # for summary statistics and regression tables
+stargazer(m.pols, m.fe, df = FALSE, dep.var.labels = "Renewable Energy", covariate.labels = c('GDP per capita (constant 2000 US$)', 'Energy Imports (% of total energy)','Interest Rate', 'Oil Price'), notes = '(1) pooled OLS (2) Fixed effects', header = F, float = F, out = "reg.html")
+
+
+```
+
+
+We also extract country specific fixed effects to see which country have a higher effect. This can be a proxy for country specific things - environment for RE, policy, businesses etc. We plot the relative fixed effects and then plot the top 10 of them. It should make for a good graph. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+# extracting the fixed effects 
+country_effect <- data.frame(summary(fixef(m.fe))[,1],summary(fixef(m.fe))[,4]) 
+country_effect$country <- rownames(country_effect)
+names(country_effect)[1] <- "intercept"
+names(country_effect)[2] <- "pvalue"
+country_effect$prop_intercept <- country_effect$intercept/min(country_effect$intercept) #calculating FE of each country relative to min
+#country_effect$SignificanceLevel <- cut(country_effect$pvalue, c(-1, 0.01, 0.05, 0.1, 1), labels = c("1%", "5%", "10%", "Not significant"))
+country_effect <- arrange(country_effect,prop_intercept)
+countries10 <- tail(country_effect,10)[3] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+country_effect10  <- filter(country_effect, grepl(countries10, country)) #selecting top 10 countries by fixed effect 
+
+# graphing relative FE
+ggplot(data = country_effect10) + aes(country,prop_intercept) + geom_bar(stat = "identity") + coord_cartesian(ylim = c(1,1.75)) +  xlab("\n Country") +
+  ylab(" ") +
+  ggtitle("Proportionate Country Effect relative to minimum\n") +
+  theme_bw(base_size = 10) 
+
+```
+
+Testing whether there are country specific fixed effects 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+# Testing whether FE is the best model 
+plmtest(m.pols, type=("bp")) # to test for panel effect
+
+m.re <- plm(re_gen  ~ log(GDP_capita) + netenergy_imports + poly(patents,3) + interest_rate +  oil_price, data= re_data1, index=c("country", "year"), model="random")
+phtest(m.fe, m.re) # Hausman test for fixed effects
+# conclude that FE is the better model 
+
+```
+
+We also model the interaction between oil price and import intensity of the country. Specifically we look at whether the effect of oil price on RE generation increases as the import intensity of the country - intuitively we would expect such an effect. A country that imports a lot of fossil fuels can be expected to react more when oild price increases. Since the interaction effects cannot be read of a table, we create a graph for it. 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+
+# Testing whether FE is the best model 
+plmtest(m.pols, type=("bp")) # to test for panel effect
+
+m.re <- plm(re_gen  ~ log(GDP_capita) + netenergy_imports + poly(patents,3) + interest_rate +  oil_price, data= re_data1, index=c("country", "year"), model="random")
+phtest(m.fe, m.re) # Hausman test for fixed effects
+# conclude that FE is the better model 
+
+#Modeling interactions
+m.fe.i  <- plm(sw_pc_elec  ~ oil_price*netenergy_imports + log(GDP_capita) + patents + interest_rate, data= re_data1, index=c("country", "year"), model="within")
+summary(m.fe.i)
+
+vcov(m.fe.i) #variance covariance matrix
+
+vb1 <- vcov(m.fe.i)[1]
+vb3 <- vcov(m.fe.i)[6,6]
+cvb1b3 <- vcov(m.fe.i)[1,6]
+margins <- data.frame(
+  netenergy_imports = min(re_data1$netenergy_imports, na.rm =T):max(re_data1$netenergy_imports, na.rm =T),
+  me = coef(m.fe.i)[1] + coef(m.fe.i)[6] * ( 
+  min(re_data1$netenergy_imports, na.rm =T):max(re_data1$netenergy_imports, na.rm =T)),
+  se = sqrt(vb1 + (min(re_data1$netenergy_imports, na.rm =T):max(re_data1$netenergy_imports, na.rm =T))^2 * vb3 + 2 *(min(re_data1$netenergy_imports, na.rm =T):max(re_data1$netenergy_imports, na.rm =T)) * cvb1b3)
+)
+margins$lwr <- margins$me - 1.96 * margins$se
+margins$upr <- margins$me + 1.96 * margins$se
+
+ggplot(data = margins, aes(x = netenergy_imports, y = me, ymin = lwr, ymax = upr)) +
+  geom_ribbon(fill = 'blue', alpha = 0.2) + 
+  geom_line(colour = "red", size =1) + theme_bw() + 
+  geom_hline(yintercept = 0, linetype = 'dashed') + 
+  xlab("\nEnergy Imports (% of consumption)") + 
+  ylab("Marginal Effect of Oil Price\n") +
+  ggtitle("Marginal Effect of Oil Price conditioned over Import Intensity of Energy\n") +
+  theme(panel.background = element_rect(fill = 'white', colour = 'black'))
+
+```
+
+##References
+
+@R-dplyr and @CiteR works on R Programming were used as reference for this research proposal.
+
+[^KEY]: This is a footnote.
+
