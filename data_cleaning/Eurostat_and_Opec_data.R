@@ -9,10 +9,10 @@ library(rio)
  
 ### Renewable Energy Generation
 
-solar <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_105a_1_Data.csv')
-wind1 <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_105a_2_Data.csv')
-wind2 <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_105a_3_Data.csv')
-wind3 <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_105a_4_Data.csv')
+solar <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_105a_1_Data.csv')
+wind1 <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_105a_2_Data.csv')
+wind2 <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_105a_3_Data.csv')
+wind3 <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_105a_4_Data.csv')
 
 #select the necessary columns
 solar <- select(solar, GEO, TIME, Value)
@@ -43,7 +43,7 @@ names(re_generation)[4] <- "solar_gen"
 re_generation$re_gen <- re_generation$wind_gen + re_generation$solar_gen
 
 # Share of electricity produced from renewable energy sources and the gross national electricity consumption
-re_pc_elec <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_ind_335a_1_Data.csv')
+re_pc_elec <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_ind_335a_1_Data.csv')
 re_pc_elec <- re_pc_elec[-which(re_pc_elec$GEO == "European Union (28 countries)"),]
 re_pc_elec <- re_pc_elec[which(re_pc_elec$INDIC_EN == "Share of renewable energy in electricity"),]
 re_pc_elec[,5] <- as.numeric(re_pc_elec[,5])
@@ -52,7 +52,7 @@ re_pc_elec$INDIC_EN <- NULL #deleting unnecessary columns
 re_pc_elec$UNIT <- NULL #deleting unnecessary columns
 
 # Share of electricity produced from renewable energy sources and the gross national electricity consumption
-elec_total <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/nrg_105a_1_total_consumption.csv')
+elec_total <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/nrg_105a_1_total_consumption.csv')
 elec_total <- elec_total[-which(elec_total$GEO == c("Euro area (19 countries)","European Union (28 countries)")),]
 elec_total <- elec_total[which(elec_total$UNIT == "Gigawatt-hour"),]
 elec_total[,'Value'] <- as.numeric(gsub(",", "",elec_total[,'Value'])) # gsub replaces "," in numbers to "" before converting them to numeric
@@ -66,7 +66,7 @@ elec_total$`Flag and Footnotes` <- NULL #deleting unnecessary columns
 
 ### Energy technologies patent applications to the EPO by priority year
 
-energy_patent <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/patents_eu.csv')
+energy_patent <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/patents_eu.csv')
 
 #select the necessary columns
 head(energy_patent)
@@ -80,7 +80,7 @@ summary(energy_patent$Value)
 
 ### Long term interest rates (10 year bond yields) 
 
-interest_rates <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/interest_rates_annual.csv')
+interest_rates <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/interest_rates_annual.csv')
 
 #select the necessary columns
 head(interest_rates)
@@ -97,7 +97,7 @@ names(interest_rates)[3] <- "interest_rate"
 
 ### Oil prices
 
-oil_price <- import('https://raw.githubusercontent.com/Camila-RV/VieiraKhanna_Assignment3/master/data_raw/crude_opec_all.csv')
+oil_price <- import('https://raw.githubusercontent.com/tarun-hertie/Final_Paper/master/data_raw/crude_opec_all.csv')
 
 #treat value column as numeric + clean missing values
 oil_price[,2] <- as.numeric(oil_price[,2])
