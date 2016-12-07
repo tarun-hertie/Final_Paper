@@ -14,7 +14,7 @@ This repository is created for the purpose of the course [MPP-E1180: Introductio
 
 In addition to this README, one may find the following folders and files in the repository:
 
-- [data_cleaning]() Folder containing data from separated sources as well as cleaning and merging coding
-- [data_raw]()Folder containing all raw data
-- [Assignment03.pdf]() - a .pdf file containing the final paper
-- [Assignment03.Rmd]()- a markdown document used for creating the final paper including dynamically generated tables and figures 
+- [data_cleaning](https://github.com/tarun-hertie/Final_Paper/tree/master/data_cleaning) Folder containing data from separated sources as well as cleaning and merging coding
+- [data_raw](https://github.com/tarun-hertie/Final_Paper/tree/master/data_raw) Folder containing all raw data
+- [Assignment03.pdf]() is a .pdf file containing the final paper
+- [Assignment03.Rmd]() is a markdown document used for creating the final paper including dynamically generated tables and figures 
