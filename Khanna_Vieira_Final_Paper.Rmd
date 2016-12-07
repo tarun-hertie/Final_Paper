@@ -1,7 +1,7 @@
 ---
-title: "MPP-E1180: Collaborative Social Data Analysis Assignment 3"
+title: "Determinants of Renewable Energy: An EU Cross-Country Analysis"
 author: "Camila Vieira & Tarun Khanna"
-date: "11 November 2016"
+date: "16 December 2016"
 output: pdf_document
 graphics: yes
 bibliography: 
@@ -9,15 +9,13 @@ bibliography:
         - RpackageCitations.bib
 ---
 
-#Determinants of Renewable Energy Investments: An EU Cross-Country Analysis
-
-## Introduction
+## 1. Introduction
 
 Climate change imposes real challenges to societies' environmental and economic wellbeing. This state of affairs urges us to think on ways to cope with the effects of climate change as well as finding potential alternatives to the roots of this human-caused phenomenon. Consequently, this pressure has put into question the traditional energy sources in use which have contributed to high levels of pollution and greenhouse gas emissions worldwide. Two thirds of total carbon dioxide emissions in the world come from the energy sector and their effect on human livelihood is increasingly negative. There are two potential ways of offsetting the impact of such emissions - adaptation and mitigation. While adaptation refers to the efforts to limit human exposure to climate change, mitigation is related to human activities intended to reduce the magnitude of climate change and its impact on human life. Mitigation further involves a two-fold strategy - reduction of carbon dioxide emissions through efficiency gains in energy consumption and production, and the shift to other, cleaner forms of energy production through the adoption of alternative sources.
 
 Renewable energy adoption constitutes a means to deal with this challenge and renewable energy sources have been increasingly adopted worldwide for being a consistent way of improving energy efficiency by reducing energy consumption levels. Recent studies of @eyraud2011s and @del2014determinants identified that renewable energy sources will be the key drivers of the energy sector in coming years. Our main goal with this research project is to identify what are the determinants of renewable energy, namely wind and solar electricity, across European countries and to what extend factors, such as income, changes in fuel prices, and interest rates have a significant impact on prospects of green energy. 
 
-##Literature Review
+## 2.Literature Review
 
 @romano2011investments analyzes the driving of investments in renewable energy sources in low carbon and high carbon economies. This author argues that there are different ways of assessing the development of renewable energy sources in the literature. One method is to measure the replacement of traditional energy sources in the total energy supply while the other way which is also mentioned by @bird2005policies is to measure the total amount of renewable enegy produced. Each of those approaches were used by @marques2010motivations and @carley2009state. Marques et al. use the contribution of renewable to energy supply as a percentage of
 total primary energy supply while Carley focuses on the yearly electricity generation from renewable energy sources.
@@ -29,7 +27,7 @@ Another interesting study on green investments was conducted by @ilas2014macroec
 
 Taking into account those previous studies we now aim to verify the determinants of green energy across the 28 countries of the European Union between 2005 and 2013 by adopting a panel data approach. The impact of those determinants on wind and solar energy development will be estimated in real terms using fixed effects methodology.
 
-## Data Description
+## 3. Data Description
 
 ### Dependent Variable
 
@@ -76,7 +74,7 @@ The benchmark for crude oil price is the OPEC Reference Basket. This basket repr
 
 Hypothesis: Crude oil prices can be used as proxy for the demand of energy from fossil fuels. One can assume that a higher price of fossil fuel is positively correlated with investments in renewable energy sources and changes in prices may reveal trends in energy production and consumption. In this sense, we hypothesize that a higher price in crude oil means higher demand, or at least, scarcer availiability of fossil fuels in general, and therefore, it may produce an incentive for countries to invest in renewable energy sources. 
 
-## Descriptive Statistics
+## 4. Descriptive Statistics
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
@@ -243,7 +241,7 @@ rm(list = c("re_top10"))
 
 ```
 
-##Models 
+## 5. Research Design 
 
 A pooled OLS regression was run with total renewable energy generation as the dependent variable. We take a log of the variable GDP per capita to reduce the skewness in the data. A polynomial transformation was added for the variable patents to take into account the non linear relationship between innovation and RE generation. 
 
@@ -291,6 +289,9 @@ ggplot(data = re_wind_top10) +
   theme_bw(base_size = 10)       
 
 ```
+
+## 6. Key Results
+
 
 ```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, results='asis'}
 
@@ -379,7 +380,10 @@ ggplot(data = margins, aes(x = netenergy_imports, y = me, ymin = lwr, ymax = upr
 
 ```
 
-##References
+## 7. Conclusion
+
+
+## 8. References
 
 @R-dplyr and @CiteR works on R Programming were used as reference for this research proposal.
 
