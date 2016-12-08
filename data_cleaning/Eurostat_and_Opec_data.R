@@ -107,16 +107,47 @@ names(oil_price)[2] <- "oil_price"
 names(oil_price)[3] <- "GEO"
 head(oil_price)
 
+### Political variable
+
+library(foreign) # to import data from Stata
+party <- read.dta('https://cdn.rawgit.com/tarun-hertie/Final_Paper/master/data_raw/cambridge_political.dta') # used https://rawgit.com/ to get the raw file
+party <- select(party, countryname, sumgreen, sumright, date) 
+names(party)[1] <- "GEO"
+names(party)[4] <- "TIME"
+party[,2] <- as.numeric(party[,2])
+party[,3] <- as.numeric(party[,3])
+party[,4] <- substr(party[,4],1,4) # retaining on the year of the election
+
+library(DataCombine) # to fill down data, identify and remove duplicates
+FindDups(party, c("GEO","TIME")) # looking for duplicates in the database
+arrange(party, GEO,TIME) # looking for duplicates
+party  <- FindDups(party, c("GEO","TIME"), NotDups = TRUE) # removing duplicates in the database
+
 ### Merging the Eurostat databases
 Combine_EuroStat <- merge(re_generation, elec_total, by =c("GEO","TIME"), all.x = TRUE, all.y = TRUE)
 Combine_EuroStat <- merge(Combine_EuroStat, energy_patent, by =c("GEO","TIME"), all.x = TRUE, all.y = TRUE)
 Combine_EuroStat <- merge(Combine_EuroStat, interest_rates, by =c("GEO","TIME"), all.x = TRUE, all.y = TRUE)
 Combine_EuroStat$GEO[Combine_EuroStat$GEO == "Germany (until 1990 former territory of the FRG)" ] <- "Germany"
 Combine_EuroStat <- merge(Combine_EuroStat, oil_price, by =c("GEO","TIME"), all.x = TRUE, all.y = TRUE)
+Combine_EuroStat <- merge(Combine_EuroStat, party, by = c("GEO","TIME"), all.x = TRUE)
 names(Combine_EuroStat)[1] <- "country" 
 names(Combine_EuroStat)[2] <- "year"
 
+#treating political variable to get get a complete time series 
+
+#NOTE: It contains the support for green party in a particular election. Given that we are using annual panel 
+#data,I would now have to convert the data to give the information about how much support did green party have 
+#in a particular year, right? Which means if there was an election in 2009 and then in 2014, then 
+#between 2009 and 2014, I take the value as support being equal to that in 2009 and thereafter the 
+#value of support in 2014.
+
+Combine_EuroStat <- Combine_EuroStat %>% group_by(country) %>%
+  mutate(sumgreen = FillDown(Var = Combine_EuroStat$sumgreen))
+
+Combine_EuroStat <- Combine_EuroStat %>% group_by(country) %>% 
+  mutate(sumright = FillDown(Var = Combine_EuroStat$sumright))
+
 rm(list = c("wind1", "wind2", "wind3","solar","energy_patent","interest_rates","oil_price",
-            "re_generation", "re_pc_elec", "elec_total"))
+            "re_generation", "re_pc_elec", "elec_total", "party"))
 
 
