@@ -1,0 +1,53 @@
+---
+title: "Renewable Energy: What do explain the adoption of solar and wind power in European countries?"
+output: flexdashboard::flex_dashboard
+vertical_layout: fill
+runtime: shiny
+theme: simplex
+---
+
+Inputs {.sidebar}
+---------------------------------
+
+Traditional energy sources like coal, oil and natural gas, have contributed to high levels of pollution and greenhouse gas emissions worldwide.
+
+One potential way of removing the impact of greenhouse gas emission is mitigation – that is, activities intended to reduce the magnitude of climate change and its impact on human life. 
+
+The shift to cleaner forms of energy production through the adoption of renewable energy sources is a key mitigation strategy for countries like India and China. 
+
+What about the European countries? Are they also shifting their energy sources to renewable ones? What do explain the adoption of renewable energy in European countries?
+
+
+Column
+---------------------------------
+
+### What are the renewable energy consumption levels across EU countries? 
+
+```{r}
+```
+
+
+### Solar and wind power trends
+
+```{r}
+```
+
+
+
+
+Column {data-width=400}
+---------------------------------
+
+
+### The impact of oil prices...
+
+```{r}
+
+```
+
+
+### ... and other factors in renewable energy uptake.
+
+```{r}
+
+```
