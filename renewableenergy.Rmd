@@ -1,9 +1,9 @@
 ---
 title: "Renewable Energy: What do explain the adoption of solar and wind power in European countries?"
+author: Camila & Tarun
 output: flexdashboard::flex_dashboard
 vertical_layout: fill
 runtime: shiny
-theme: simplex
 ---
 
 Inputs {.sidebar}
@@ -23,16 +23,63 @@ Column
 
 ### What are the renewable energy consumption levels across EU countries? 
 
-```{r}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
+
+setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
+
+# Importing and cleaning data from Eurostat
+source('Eurostat_and_Opec_data.R')
+
+# Importing and cleaning data from World Bank
+source('WDI_data.R')
+
+# Merging the data
+re_data <- merge(Combined_WDI,Combine_EuroStat,by = c("country", "year"), all.x = T, all.y = T)
+
+# Remove missing values
+re_data1 <- na.omit(re_data)
+
+#creating var for solar and wind gen as percent of total elec consumption
+re_data1$sw_pc_elec <- re_data1$re_gen/re_data1$elec_total*100 
+re_data_map <- re_data1[which(re_data1$year == "2013"),]
+
+library(googleVis)
+# Plot
+re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
+                      colorvar = 'sw_pc_elec',
+                      options = list(
+                        colors = "['#f7fcb9', '#31a354']",
+                        region ="150"
+                          ))
+
+print(re_map, tag = 'chart')
+
 ```
 
+###  Wind power trends
 
-### Solar and wind power trends
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
-```{r}
+#library(ggplot2)
+#re_data1 <- re_data1[order(re_data1$year,re_data1$wind_gen),] #arranging data
+#countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+#re_wind_top10  <- filter(re_data, grepl(countries10, country))
+
+#Colours <- c('#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3','#c7eae5','#80cdc1','#35978f','#01665e','#003c30')
+
+#w_power <- ggplot(data = na.omit(re_wind_top10)) + 
+ #       aes(x = year, y = wind_gen, group = country, fill = country) + #geom_area(position = "stack") + 
+#scale_color_manual(values = Colours) +
+#xlab("\nYear") +
+#ylab("Wind Energy Generation(TWh)\n") +
+#ggtitle("Wind Energy Generation in ten largest wind energy markets in Europe\n") +
+#theme_bw(base_size = 10)
+#rm(list = c("re_wind_top10", "countries10"))
+
+#library(plotly)
+#ggplotly(w_power)
+
 ```
-
-
 
 
 Column {data-width=400}
@@ -41,13 +88,21 @@ Column {data-width=400}
 
 ### The impact of oil prices...
 
-```{r}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
 ```
 
 
 ### ... and other factors in renewable energy uptake.
 
-```{r}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+library(googleVis)
+
+re_data1 <- '\n{"iconType":"LINE", "dimensions":{
+    "iconDimensions":["dim0"]},"xAxisOption":"_TIME",
+    "orderedByX":false,"orderedByY":false,"yZoomedDataMax":100}\n'
+plot(gvisMotionChart(sw_pc_elec,"countries10","year",
+      options=list(state=re_data1, height=320)))
 
 ```
