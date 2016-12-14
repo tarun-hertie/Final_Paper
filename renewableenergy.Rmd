@@ -51,14 +51,34 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
                         colors = "['#f7fcb9', '#31a354']",
                         region ="150"
                           ))
-
-print(re_map, tag = 'chart')
+plot(re_map)
 
 ```
 
-###  Wind power trends
+### Solar and Wind Power Trends
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+re_data1$sw_rise <- unlist(
+        tapply(re_data1$sw_pc_elec, re_data1$country, function(x) c(NA,100*diff(x)/x[-length(x)])))
+
+library(reshape2)
+library(plotly)
+
+re_data2 <- re_data1[order(re_data1$year,re_data1$sw_rise),] #arranging data
+countries10 <- tail(re_data2,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+uptake_changes <- filter(re_data2, grepl(countries10, country))
+
+
+percent_change <- ggplot(data = uptake_changes,
+       aes(x = year, y = sw_rise, group = country,colour = country)) +
+    geom_line() +
+    geom_point() +
+        xlab(label = "\nYear") +
+        ylab(label = "% change in RE uptake\n")
+
+ggplotly(percent_change)
+    
 
 #library(ggplot2)
 #re_data1 <- re_data1[order(re_data1$year,re_data1$wind_gen),] #arranging data
@@ -82,13 +102,29 @@ print(re_map, tag = 'chart')
 ```
 
 
-Column {data-width=400}
+Column {data-width=500}
 ---------------------------------
-
 
 ### The impact of oil prices...
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+
+#re_data1$re_gen_sum <-aggregate(x = re_data1[c("re_gen")], FUN = sum, by = list(Group.date = re_data1$year))
+
+library(plotly)
+ay <- list(
+  tickfont = list(color = "red"),
+  overlaying = "y",
+  side = "right",
+  title = "Oil Prices")
+
+plot_ly() %>%
+  add_lines(x = "year", y = "re_gen_sum", name = "RE Generation(TWh)") %>%
+  add_lines(x = "year", y = ~0:140, name = "Oil prices", yaxis = "y2") %>%
+  layout(
+   title = "RE generation VS. Oil Prices", yaxis2 = ay,
+    xaxis = list(title="Year")
+  )
 
 ```
 
@@ -97,12 +133,11 @@ Column {data-width=400}
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
-library(googleVis)
-
-re_data1 <- '\n{"iconType":"LINE", "dimensions":{
+myStateSettings <- '\n{"iconType":"LINE", "dimensions":{
     "iconDimensions":["dim0"]},"xAxisOption":"_TIME",
     "orderedByX":false,"orderedByY":false,"yZoomedDataMax":100}\n'
-plot(gvisMotionChart(sw_pc_elec,"countries10","year",
-      options=list(state=re_data1, height=320)))
+plot(gvisMotionChart(Fruits, "Fruit", "Year", 
+      options=list(state=myStateSettings, height=320)))
 
-```
+
+
