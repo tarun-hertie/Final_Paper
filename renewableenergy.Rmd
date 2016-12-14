@@ -78,7 +78,7 @@ percent_change <- ggplot(data = uptake_changes,
         ylab(label = "% change in RE uptake\n")
 
 ggplotly(percent_change)
-    
+   
 
 #library(ggplot2)
 #re_data1 <- re_data1[order(re_data1$year,re_data1$wind_gen),] #arranging data
@@ -138,6 +138,5 @@ myStateSettings <- '\n{"iconType":"LINE", "dimensions":{
     "orderedByX":false,"orderedByY":false,"yZoomedDataMax":100}\n'
 plot(gvisMotionChart(Fruits, "Fruit", "Year", 
       options=list(state=myStateSettings, height=320)))
-
 
 
