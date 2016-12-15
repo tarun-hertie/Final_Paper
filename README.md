@@ -16,5 +16,5 @@ In addition to this README, one may find the following folders and files in the 
 
 - [data_cleaning](https://github.com/tarun-hertie/Final_Paper/tree/master/data_cleaning) is a folder containing data from separated sources as well as cleaning and merging coding
 - [data_raw](https://github.com/tarun-hertie/Final_Paper/tree/master/data_raw) is a folder containing all raw data
-- [Assignment03.pdf]() is a .pdf file containing the final paper
-- [Assignment03.Rmd]() is a markdown document used for creating the final paper including dynamically generated tables and figures 
+- [Final_Paper.pdf](https://github.com/tarun-hertie/Final_Paper/blob/master/Khanna_Vieira_Final_Paper.pdf) is a .pdf file containing the final paper
+- [Final_Paper.Rmd](https://github.com/tarun-hertie/Final_Paper/blob/master/Khanna_Vieira_Final_Paper.Rmd) is a markdown document used for creating the final paper including dynamically generated tables and figures 
