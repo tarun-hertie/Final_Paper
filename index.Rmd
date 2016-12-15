@@ -18,7 +18,7 @@ The shift to cleaner forms of energy production through the adoption of renewabl
 
 What about the European countries? Are they also switching to renewable energy? What factors explain the adoption of renewables - wind and solar - in European countries?
 
-Row
+Row {data-height=360}
 -----------------------
 
 ###What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy?
@@ -54,7 +54,7 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
 print(re_map, tag = 'chart')
 ```
 
-Row Row {.tabset .tabset-fade}
+Row {.tabset .tabset-fade}
 ------------------------------
 
 ###Wind Power Trend 
@@ -134,7 +134,7 @@ print(M,  tag = 'chart')
 
 ```
 
-Row 
+Row
 ----------------------------
 
 ###Does RE generation follow changes in oil prices?
