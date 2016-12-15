@@ -23,7 +23,7 @@ Column
 
 ### What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy? 
 
-```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
 
 setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
 
@@ -56,7 +56,7 @@ print(re_map, tag = 'chart')
 
 ### Solar and Wind Power Trends
 
-```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=10, cache=TRUE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=10, cache=TRUE}
 
 re_data1$year <- as.numeric(re_data1$year)
 
@@ -67,7 +67,7 @@ print(M,  tag = 'chart')
 
 ### Solar and Wind Power Trends
 
-```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
 library(ggplot2)
 library(dplyr)
