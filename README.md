@@ -5,7 +5,7 @@
 ## Interactive Website
 **16 December 2016**
 
-## Determinants of Renewable Energy: An EU cross-country analysis
+## Determinants of Renewable Energy in EU
 
 ### Description
 This repository is created for the purpose of the course [MPP-E1180: Introduction to Collaborative Social Science Data Analysis](https://github.com/HertieDataScience). It contains in a consolidated manner the data, codes and analysis that the authors used for their research on "Determinants of Renewable Energy in European countries". 
