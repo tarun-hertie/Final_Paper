@@ -51,16 +51,16 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
                         colors = "['#f7fcb9', '#31a354']",
                         region ="150"
                           ))
-#print(re_map, tag = 'chart')
+print(re_map, tag = 'chart')
 ```
 
 ### Solar and Wind Power Trends
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=10, cache=TRUE}
+```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=10, cache=TRUE}
 
 re_data1$year <- as.numeric(re_data1$year)
 
-M = gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var")
+M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var")
 print(M,  tag = 'chart')
 
 ```
@@ -96,26 +96,32 @@ ggplotly(wind_chart)
 
 ```
 
-### The impact of oil prices...
+### Does RE generation follow changes in oil prices?
 
-```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
 
-#re_data1$re_gen_sum <-aggregate(x = re_data1[c("re_gen")], FUN = sum, by = list(Group.date = re_data1$year))
+# Var. in RE generation
+# Creation of a new data frame subset + sum of RE elect. generation in each year for all countries
+re_data2 <- aggregate(re_data1$re_gen, list(re_data1$year), FUN=sum)
+names(re_data2)[names(re_data2) == 'x'] <- 're_gen_sum'
+names(re_data2)[names(re_data2) == 'Group.1'] <- 'year'
 
-library(plotly)
-ay <- list(
-  tickfont = list(color = "red"),
-  overlaying = "y",
-  side = "right",
-  title = "Oil Prices")
+#Percentage changes in RE generation from 2005 until 2013
+re_data2$re_gen_pct <- c(NA, 17.93, 27.53, 17.38, 15.80, 16.80, 30.69, 21.54, 16.15)
 
-plot_ly() %>%
-  add_lines(x = "year", y = "re_gen_sum", name = "RE Generation(TWh)") %>%
-  add_lines(x = "year", y = ~0:140, name = "Oil prices", yaxis = "y2") %>%
-  layout(
-   title = "RE generation VS. Oil Prices", yaxis2 = ay,
-    xaxis = list(title="Year")
-  )
+#Var. in Oil prices
+re_data2$oil_pct <- c(NA, 20.61, 13.09, 36.72, -35.35, 26.84, 38.74, 1.85, -3.27)
+
+library(googleVis)
+#Plotting graph
+Dashed <-  gvisLineChart(re_data2, xvar = "year", yvar=c("re_gen_pct","oil_pct"),
+                         options=list(series="[{color:'green', targetAxisIndex: 0, 
+                         lineWidth: 1, lineDashStyle: [2, 2, 20, 2, 20, 2]}, 
+                         {color: 'blue',targetAxisIndex: 1, 
+                         lineWidth: 1, lineDashStyle: [2, 2, 20, 2, 20, 2]}]",
+                                 vAxes="[{title:'% change in RE Generation'}, {title:'% change in oil prices'}]"
+                         ))
+
+print(Dashed, tag = 'chart')
 
 ```
-
