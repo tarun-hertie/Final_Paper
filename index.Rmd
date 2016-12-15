@@ -23,7 +23,7 @@ Column
 
 ### What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy? 
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
+```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
 
 setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
 
@@ -51,13 +51,23 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
                         colors = "['#f7fcb9', '#31a354']",
                         region ="150"
                           ))
-print(re_map, tag = 'chart')
+#print(re_map, tag = 'chart')
+```
+
+### Solar and Wind Power Trends
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
+
+re_data1$year <- as.numeric(re_data1$year)
+
+M = gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var")
+print(M,  tag = 'chart')
 
 ```
 
 ### Solar and Wind Power Trends
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
 library(ggplot2)
 library(dplyr)
@@ -88,7 +98,7 @@ ggplotly(wind_chart)
 
 ### The impact of oil prices...
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE}
 
 #re_data1$re_gen_sum <-aggregate(x = re_data1[c("re_gen")], FUN = sum, by = list(Group.date = re_data1$year))
 
