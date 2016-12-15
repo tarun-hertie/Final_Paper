@@ -4,6 +4,7 @@ author: Camila & Tarun
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: scroll
+    orientation: rows
 ---
 
 Inputs {.sidebar}
@@ -17,7 +18,7 @@ The shift to cleaner forms of energy production through the adoption of renewabl
 
 What about the European countries? Are they also switching to renewable energy? What factors explain the adoption of renewables - wind and solar - in European countries?
 
-Column
+Row
 -----------------------
 
 ###What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy?
@@ -53,6 +54,9 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
 print(re_map, tag = 'chart')
 ```
 
+Row Row {.tabset .tabset-fade}
+------------------------------
+
 ###Wind Power Trend 
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
@@ -83,11 +87,40 @@ ggplotly(wind_chart)
 
 ```
 
-Column
+###Solar Power Trend
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
+
+library(ggplot2)
+library(dplyr)
+library(plotly)
+
+#selecting data for solar
+re_data1 <- re_data1[order(re_data1$year,re_data1$solar_gen),] #arranging data
+countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
+re_solar_top10  <- filter(re_data, grepl(countries10, country)) #selecting top 10 countries by generation 
+
+#create graph of Wind Generation
+Colours <- c('#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3','#c7eae5','#80cdc1',
+             '#35978f','#01665e','#003c30') # assigning colour pallette
+
+solar_chart <- ggplot(data = na.omit(re_solar_top10)) + 
+  aes(x = year, y = solar_gen, group = country, fill = country) +
+  geom_area(position = "stack") + 
+  scale_color_manual(values = Colours) +
+  xlab("\nYear") +
+  ylab("Solar Energy Generation (TWh)\n") +
+  ggtitle("\nSolar Energy Generation in ten largest solar energy markets in Europe\n") +
+  theme_bw(base_size = 10)
+
+ggplotly(solar_chart)
+```
+
+Row 
 ----------------------------
 
 ### From the current levels of electricity consumption in EU...
-...Select on the left side the factors that may impact the uptake of RE. On the right, check the countries for further info. See how things evolve by changing the time slider located at the the bottom.
+...Select on the left side the factors that may impact the uptake of RE. On the right, check the countries for further info. See how things evolve by clicking on the play bottom or moving the time slider located at the the bottom.
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
 
@@ -100,6 +133,9 @@ M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="r
 print(M,  tag = 'chart')
 
 ```
+
+Row 
+----------------------------
 
 ###Does RE generation follow changes in oil prices?
 
