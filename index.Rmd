@@ -56,7 +56,7 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
 
 ### Solar and Wind Power Trends
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=8, cache=TRUE}
 
 re_data1$year <- as.numeric(re_data1$year)
 
