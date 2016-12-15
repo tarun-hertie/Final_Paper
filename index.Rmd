@@ -1,9 +1,8 @@
 ---
-title: "Renewable Energy: What factors explain the adoption of solar and wind power in EU countries?"
+title: "Renewable Energy: What do explain the adoption of solar and wind power in European countries?"
 author: Camila & Tarun
-output: 
-  flexdashboard::flex_dashboard:
-    vertical_layout: scroll
+output: flexdashboard::flex_dashboard
+vertical_layout: scroll
 ---
 
 Inputs {.sidebar}
@@ -11,19 +10,18 @@ Inputs {.sidebar}
 
 Traditional energy sources like coal, oil and natural gas, have contributed to high levels of pollution and greenhouse gas emissions worldwide.
 
-One potential way of removing the impact of greenhouse gas emission is mitigation – that is, activities intended to reduce the magnitude of climate change and its impact on human life. 
+One potential way of removing the impact of greenhouse gas emission is mitigation – that is, activities intended to reduce the magnitude of climate change and its impact on human life.
 
-The shift to cleaner forms of energy production through the adoption of renewable energy sources is a key mitigation strategy for countries like India and China. 
+The shift to cleaner forms of energy production through the adoption of renewable energy sources is a key mitigation strategy for countries like India and China.
 
 What about the European countries? Are they also switching to renewable energy? What factors explain the adoption of renewables - wind and solar - in European countries?
 
-
 Column
----------------------------------
+-----------------------
 
-### What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy? 
+###What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy?
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
 
 setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
 
@@ -54,20 +52,9 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
 print(re_map, tag = 'chart')
 ```
 
-### Solar and Wind Power Trends
+###Wind Power Trend 
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=10, cache=TRUE}
-
-re_data1$year <- as.numeric(re_data1$year)
-
-M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var")
-print(M,  tag = 'chart')
-
-```
-
-### Solar and Wind Power Trends
-
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
 
 library(ggplot2)
 library(dplyr)
@@ -93,10 +80,27 @@ wind_chart <- ggplot(data = na.omit(re_wind_top10)) +
 
 ggplotly(wind_chart)
 
+```
+
+Column
+----------------------------
+
+### From the current levels of electricity consumption in EU...
+...Select on the left side the factors that may impact the uptake of RE. On the right, check the countries for further info. See how things evolve by changing the time slider located at the the bottom.
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
+
+library(googleVis)
+
+myState <- '\n{"time":"2013","orderedByX":true,"xZoomedDataMax":26,"nonSelectedAlpha":0.4,"sizeOption":"_UNISIZE","duration":{"multiplier":1,"timeUnit":"Y"},"uniColorForNonSelected":false,"iconKeySettings":[],"xZoomedDataMin":0,"iconType":"VBAR","yZoomedIn":false,"xZoomedIn":false,"xLambda":1,"showTrails":false,"xAxisOption":"11","yZoomedDataMax":40,"yZoomedDataMin":0,"orderedByY":false,"yAxisOption":"11","colorOption":"_UNIQUE_COLOR","dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"yLambda":1}\n'
+
+re_data1$year <- as.numeric(re_data1$year)
+M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var", options=list(width=650, height=350, state=myState))
+print(M,  tag = 'chart')
 
 ```
 
-### Does RE generation follow changes in oil prices?
+###Does RE generation follow changes in oil prices?
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
 
@@ -114,14 +118,14 @@ re_data2$oil_pct <- c(NA, 20.61, 13.09, 36.72, -35.35, 26.84, 38.74, 1.85, -3.27
 
 library(googleVis)
 #Plotting graph
-Dashed <-  gvisLineChart(re_data2, xvar = "year", yvar=c("re_gen_pct","oil_pct"),
+Dashed <-  gvisLineChart(re_data2, xvar = 'year', yvar=c('re_gen_pct','oil_pct'),
                          options=list(series="[{color:'green', targetAxisIndex: 0, 
                          lineWidth: 1, lineDashStyle: [2, 2, 20, 2, 20, 2]}, 
                          {color: 'blue',targetAxisIndex: 1, 
-                         lineWidth: 1, lineDashStyle: [2, 2, 20, 2, 20, 2]}]",
+                         lineWidth: 2, lineDashStyle: [4, 1]}]",
                                  vAxes="[{title:'% change in RE Generation'}, {title:'% change in oil prices'}]"
                          ))
 
 print(Dashed, tag = 'chart')
-
 ```
+
