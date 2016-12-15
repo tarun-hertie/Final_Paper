@@ -1,8 +1,9 @@
 ---
 title: "Renewable Energy: What factors explain the adoption of solar and wind power in EU countries?"
 author: Camila & Tarun
-output: flexdashboard::flex_dashboard
-vertical_layout: fill
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
 ---
 
 Inputs {.sidebar}
@@ -20,9 +21,9 @@ What about the European countries? Are they also switching to renewable energy? 
 Column
 ---------------------------------
 
-### What are the renewable energy penetration levels across EU countries? 
+### What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy? 
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=6}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height=4, cache=TRUE}
 
 setwd("~/Desktop/CollaborativeDataMethods/VieiraKhanna_Assignment3/data_cleaning")
 
@@ -80,6 +81,7 @@ ggplotly(percent_change)
 
 ```
 
+
 Column {data-width=500}
 ---------------------------------
 
@@ -105,16 +107,4 @@ plot_ly() %>%
   )
 
 ```
-
-
-### ... and other factors in renewable energy uptake.
-
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE}
-
-myStateSettings <- '\n{"iconType":"LINE", "dimensions":{
-    "iconDimensions":["dim0"]},"xAxisOption":"_TIME",
-    "orderedByX":false,"orderedByY":false,"yZoomedDataMax":100}\n'
-plot(gvisMotionChart(Fruits, "Fruit", "Year", 
-      options=list(state=myStateSettings, height=320)))
-
 
