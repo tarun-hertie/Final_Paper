@@ -1,5 +1,5 @@
 ---
-title: "Renewable Energy: What do explain the adoption of solar and wind power in European countries?"
+title: "Renewable Energy: What factors explain the adoption of solar and wind power in EU countries?"
 author: Camila & Tarun
 output: 
   flexdashboard::flex_dashboard:
