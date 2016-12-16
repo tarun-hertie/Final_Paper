@@ -117,7 +117,7 @@ _... See how things evolved in Europe over the last decade by clicking on the 'p
 
 library(googleVis)
 
-myState <- '\n{"colorOption":"6","time":"2013","sizeOption":"6","xZoomedDataMax":26,"xZoomedIn":false,"iconKeySettings":[{"trailStart":"2013","key":{"dim0":"Italy"}},{"trailStart":"2013","key":{"dim0":"Denmark"}},{"trailStart":"2013","key":{"dim0":"United Kingdom"}},{"trailStart":"2013","key":{"dim0":"Spain"}},{"trailStart":"2013","key":{"dim0":"Germany"}}],"xLambda":1,"xZoomedDataMin":0,"iconType":"BUBBLE","yZoomedIn":false,"yAxisOption":"11","xAxisOption":"_ALPHABETICAL","orderedByY":false,"yZoomedDataMax":37.29416288,"yZoomedDataMin":0,"showTrails":true,"uniColorForNonSelected":false,"nonSelectedAlpha":0.4,"dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"yLambda":1,"orderedByX":false,"duration":{"multiplier":1,"timeUnit":"Y"}}\n'
+myState <- '\n{"uniColorForNonSelected":false,"time":"2013","dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"iconType":"BUBBLE","xZoomedDataMin":0,"xZoomedDataMax":26,"iconKeySettings":[{"trailStart":"2013","key":{"dim0":"Denmark"}},{"trailStart":"2013","key":{"dim0":"Spain"}},{"trailStart":"2013","key":{"dim0":"Germany"}}],"colorOption":"6","sizeOption":"6","yAxisOption":"11","xZoomedIn":false,"yZoomedDataMax":37.29416288,"yLambda":1,"yZoomedIn":false,"orderedByX":false,"xLambda":1,"showTrails":true,"nonSelectedAlpha":0.4,"xAxisOption":"_ALPHABETICAL","orderedByY":false,"yZoomedDataMin":0,"duration":{"multiplier":1,"timeUnit":"Y"}}\n'
 
 re_data1$year <- as.numeric(re_data1$year)
 
@@ -126,6 +126,7 @@ M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="r
 print(M,  tag = 'chart')
 
 ```
+
 
 __Click on the tabs to download solar and wind generation trends (2005-13) in top 10 electricity markets in Europe__
 
@@ -192,7 +193,7 @@ ggplotly(solar_chart)
 Row{data-height=300}
 ----------------------------
 
-###Let there be expensive oil! 
+###The Advantages of Expensive Oil
 
 Over the last decade as oil prices increased, it led to increased uptake of solar and wind energy in EU countries. In fact, our statistical analysis shows that high prices of oil are one of the most important variables in facilitating development of renewable energy in Europe. 
 
