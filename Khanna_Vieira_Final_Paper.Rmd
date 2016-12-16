@@ -19,10 +19,7 @@ The main objective of this research project is to identify the determinants of r
 
 ## 2. Literature review
 
-The first question that we faced was how best to operationalize renewable energy development. A good measure would of course be investments in renewable energy. However, data on investment in renewable energy projects tends to be classified and is not widely available. Bloomberg seems to be one of the few reliable sources of the data but was not accessible for the purpose of this project. 
-
-A review of the literature pointed to other ways of assessing the development of renewable energy sources. One method is to measure the replacement of traditional energy sources in the total energy supply. Another method, which is also mentioned by @bird2005policies, is to measure the total amount of renewable energy produced. Each of those approaches were used by @marques2010motivations and @carley2009state. @marques2010motivations use the contribution of renewable to energy supply as a percentage of total primary energy supply while @carley2009state focuses on the yearly electricity generation from renewable energy sources. By adopting this approach, @romano2011investments conducted a dynamic panel analysis of the investments in renewable sources from 1980 to 2008 in a sample of 29 countries with distinct economic and social structures as well as different levels of economic development. The results of this study show that there is a continuity of
-investment behavior in those countries that have shown sensitivity towards renewable energy sources. Moreover, it shows that countries with traditionally stable high income tend to show more attention to technologies with lower environmental impact and improved energy efficiency in comparison with fast-growing countries. Authors also concluded that the presence of nuclear power plants may affect investments in renewable energy sources.
+The first question that we faced was how best to operationalize renewable energy development. A good measure would of course be investments in renewable energy. @romano2011investments conducted a dynamic panel analysis of the investments in renewable sources from 1980 to 2008 in a sample of 29 countries with distinct economic and social structures as well as different levels of economic development. The results of this study show that there is a continuity of investment behavior in those countries that have shown sensitivity towards renewable energy sources. Moreover, it shows that countries with traditionally stable high income tend to show more attention to technologies with lower environmental impact and improved energy efficiency in comparison with fast-growing countries. Authors also concluded that the presence of nuclear power plants may affect investments in renewable energy sources. But the data on investment in renewable energy projects tends to be classified and is not widely available. Bloomberg seems to be one of the few reliable sources of the data but was not accessible for the purpose of this project. A review of the literature pointed to other ways of assessing the development of renewable energy sources. One method is to measure the replacement of traditional energy sources in the total energy supply. Another method, which is also mentioned by @bird2005policies, is to measure the total amount of renewable energy produced. Each of those approaches were used by @marques2010motivations and @carley2009state. @marques2010motivations use the contribution of renewable to energy supply as a percentage of total primary energy supply while @carley2009state focuses on the yearly electricity generation from renewable energy sources.
 
 Another important study on green investments was conducted by @imf2011green, which analyzes the factors affecting green investments between 2000 and 2010 in 35 advanced and emerging countries. The authors conclude that green investment is boosted by economic growth, a sound financial system conducive to low
 interest rates, and high fuel prices. They also find that some policy interventions, such as the
@@ -31,7 +28,7 @@ energy, have a positive and significant impact on green investment.
 
 The @imf2011green study was replicated by @ilas2014macroeconomic on an updated dataset. The paper reaffirmed that GDP per capita has a positive impact over investments in green technologies, while GDP growth and variables related to human development capacity as well as technological progress were not found to be statistically significant.
 
-This papers seeks to carry out an in depth analysis of the determinants of renewable energy across countries of the European Union. We follow in the footsteps of @ilas2014macroeconomic, but include a wider set of EU countries. The analysis is carried on data from 26 EU countries from 2005 to 2013. The countries of the EU are similar in stage of economic development, human capital development and renewable energy policies as compared to a world wide set. Factors such cost of conventional energy, level of innovation and political support for renewables might be expected to play a stronger role in explaining the differences in RE development across EU countries. 
+This papers seeks to carry out an in depth analysis of the determinants of renewable energy across countries of the European Union. We follow in the footsteps of @marques2010motivations and @carley2009state and use renewable energy generation and renewable energy penetration as a proxy for investments in the sector. Our model resembles that of @ilas2014macroeconomic, but includes a much wider set of EU countries. The analysis is carried on data from 26 EU countries from 2005 to 2013. The countries of the EU are similar in stage of economic development, human capital development and renewable energy policies as compared to a world wide set. Factors such cost of conventional energy, level of innovation and political support for renewables might be expected to play a stronger role in explaining the differences in RE development across EU countries. 
 
 ## 3. Data sources and description
 
@@ -98,7 +95,7 @@ ggplot(data = na.omit(re_wind_top10)) +
   geom_area(position = "stack") + 
   scale_color_manual(values = Colours) +
   xlab("\nYear") +
-  ylab("Wind Energy Generation(TWh)\n") +
+  ylab("Wind Energy Generation(GWh)\n") +
   ggtitle("\nWind Energy Generation in ten largest wind energy markets in Europe\n") +
   theme_bw(base_size = 10)
 
@@ -123,7 +120,7 @@ ggplot(data = na.omit(re_solar_top10)) +
   geom_area(position = "stack") + 
   scale_color_manual(values = Colours) +
   xlab("\nYear") +
-  ylab("Solar Energy Generation (TWh)\n") +
+  ylab("Solar Energy Generation (GWh)\n") +
   ggtitle("\nSolar Energy Generation in ten largest solar energy markets in Europe\n") +
   theme_bw(base_size = 10)
 
@@ -159,15 +156,15 @@ ggplot(re_data_map, aes(country, sw_pc_elec)) +
 
 ### Explanatory variables
 
-_Long-term interest rates:_ Higher interest rates imply that business will have less incentives to invest in renewable sources whereas lower interest rates foster long-term investments. We thus expect interest rates to be negatively related to renewable energy development. As the realization of investments especially those related to infrastructure occurs in the long-run, a ten-year maturity interest rate is used in this analysis. The indicator chosen for this study is the Maastricht criterion bond yields which is used as a convergence criterion for EMU for long-term interest rates (central government bond yields on the secondary market, gross of tax, with around 10 years' residual maturity). This data is obtained from Eurostat.[^6]
+__Long-term interest rates:__ Higher interest rates imply that business will have less incentives to invest in renewable sources whereas lower interest rates foster long-term investments. We thus expect interest rates to be negatively related to renewable energy development. As the realization of investments especially those related to infrastructure occurs in the long-run, a ten-year maturity interest rate is used in this analysis. The indicator chosen for this study is the Maastricht criterion bond yields which is used as a convergence criterion for EMU for long-term interest rates (central government bond yields on the secondary market, gross of tax, with around 10 years' residual maturity). This data is obtained from Eurostat.[^6]
 
 [^6]: Data available at http://ec.europa.eu/eurostat/web/interest-rates. 
 
-_Crude oil prices:_ Crude oil prices can be used as proxy for the demand of energy from fossil fuels. We hypothesize that a higher price in crude oil means higher demand, or at least, scarcer availability of fossil fuels in general, and therefore, it may produce an incentive for countries to invest in renewable energy sources. The benchmark for crude oil price is the OPEC Reference Basket. This basket represents the average of prices of petroleum blends produced by OPEC members. The historical data for oil price is obtained from the OPEC website.[^7]
+__Crude oil prices:__ Crude oil prices can be used as proxy for the demand of energy from fossil fuels. We hypothesize that a higher price in crude oil means higher demand, or at least, scarcer availability of fossil fuels in general, and therefore, it may produce an incentive for countries to invest in renewable energy sources. The benchmark for crude oil price is the OPEC Reference Basket. This basket represents the average of prices of petroleum blends produced by OPEC members. The historical data for oil price is obtained from the OPEC website.[^7]
 
 [^7]: Data available at http://www.opec.org/opec_web/en/data_graphs/40.htm. 
 
-_GDP per capita:_ In the literature, Gross Domestic Product is often associated with higher levels of green investment. We use data available from the World Development Indicators on Gross Domestic Product per capita.[^3][3a] This is calculated as Gross Domestic Product divided by midyear population, in constant 2010 USD to correct for domestic inflation and exchange rate fluctuations.
+__GDP per capita:__ In the literature, Gross Domestic Product is often associated with higher levels of green investment. We use data available from the World Development Indicators on Gross Domestic Product per capita.[^3][3a] This is calculated as Gross Domestic Product divided by midyear population, in constant 2010 USD to correct for domestic inflation and exchange rate fluctuations.
 
 [^3]: Data available at http://data.worldbank.org/indicator/NY.GDP.PCAP.KD?locations=BY. 
 [^3a]: The data taken from World Bank website is web scrapped directly into the data frame using the WDI API. 
@@ -181,23 +178,30 @@ A plot between log income and RE generation reveals that in EU the relationship 
 # create GDP_indicator
 #p <- summary(re_data1$GDP_capita) %>% as.matrix(.) %>% as.character() %>% paste(collapse = ",")
 #summary(re_data$GDP_capita)
-re_data1$GDP_ind <- cut(re_data1$GDP_capita, c(5544, 13800, 30780, 45730, 110000), labels = c("<13k", "13k-30k", "30k-45k", "45k-110k"))
+#re_data1$GDP_ind <- cut(re_data1$GDP_capita, c(5544, 13800, 30780, 45730, 110000), labels = c("<13k", "13k-30k", "30k-45k", "45k-110k"))
 
 # create graph
 ggplot(data = re_data1, aes(GDP_capita,re_gen)) +
-        geom_jitter(aes(colour = GDP_ind)) +
+        geom_jitter(aes(colour = country)) +
         xlab("\nGDP per capita (USD)") +
-        ylab("RE Generation (TWh)\n") +
+        ylab("RE Generation (GWh)\n") +
         ggtitle("Renewable Energy generation and GDP per capita\n") +
-        theme_bw(base_size = 10)
+        theme_bw(base_size = 10)+
+        guides(colour=FALSE)
 
 ```
 
-_Political support for renewable energy:_ The percentage vote-share of the green parties in the most recent elections is taken as a measure to gauge the public support for renewable energy. We derive this data from the previous work done by @abouchadi2016.[^8] This article investigates the impact of niche party success on the policy agendas of mainstream parties. The authors do so by using the data on vote-share of the green parties in elections in each country. We converted the data to give the information about how much support did green party have in a particular year (for example, if there was an election in 2009 and then in 2013, then between 2009 and 2013, we take the value as support being equal to that in 2009 and thereafter the value of support in 2013). We use this data on vote-shares to generate a proxy for political support for renewables. Higher public support for renewables, as demonstrated by higher vote-shares of green parties, is expected to be positively related with the level of renewable energy penetration. 
+_Colours in the scatter plot represent countries. Legend is supressed._
+
+__Political support for renewable energy:__ The percentage vote-share of the green parties in the most recent elections is taken as a measure to gauge the public support for renewable energy. We derive this data from the previous work done by @abouchadi2016.[^8] This article investigates the impact of niche party success on the policy agendas of mainstream parties. The authors do so by using the data on vote-share of the green parties in elections in each country. We converted the data to give the information about how much support did green party have in a particular year (for example, if there was an election in 2009 and then in 2013, then between 2009 and 2013, we take the value as support being equal to that in 2009 and thereafter the value of support in 2013). We use this data on vote-shares to generate a proxy for political support for renewables. Higher public support for renewables, as demonstrated by higher vote-shares of green parties, is expected to be positively related with the level of renewable energy penetration. 
 
 [^8]: Data available at: https://www.cambridge.org/core/journals/british-journal-of-political-science/article/div-classtitleniche-party-success-and-mainstream-party-policy-shifts-how-green-and-radical-right-parties-differ-in-their-impactdiv/AEF265EED2CAA81C35A3808F47F5908A#fndtn-supplementary-materials. 
 
-_Energy imports, net (% of energy use):_ Energy imports indicate the country's dependence on energy from other countries. We expect that higher energy imports incentivize countries to use electricity generated locally via wind and solar energy sources. The data on net energy imports is obtained from World Development Indicators[^4] and is estimated as energy use less production, both measured in oil equivalents. Energy use refers to use of primary energy before transformation to other end-use fuels, which is equal to indigenous production plus imports and stock changes, minus exports and fuels supplied to ships and aircraft engaged in international transport.
+&nbsp;
+
+&nbsp;
+
+__Energy imports, net (% of energy use):__ Energy imports indicate the country's dependence on energy from other countries. We expect that higher energy imports incentivize countries to use electricity generated locally via wind and solar energy sources. The data on net energy imports is obtained from World Development Indicators[^4] and is estimated as energy use less production, both measured in oil equivalents. Energy use refers to use of primary energy before transformation to other end-use fuels, which is equal to indigenous production plus imports and stock changes, minus exports and fuels supplied to ships and aircraft engaged in international transport.
 
 [^4]: Data available at http://data.worldbank.org/indicator/EG.IMP.CONS.ZS?locations=BY. 
 
@@ -205,21 +209,27 @@ Looking at aggregate data there does not seem to be any clear relationship betwe
 
 ```{r include=T, message=F, echo=FALSE, warning=FALSE, error=FALSE, eval=TRUE, fig.height= 3.5, fig.width=6}
 
-re_data_ee <- re_data1[which(re_data1$year == "2013"),]
+#re_data_ee <- re_data1[which(re_data1$year == "2013"),]
+
+#re_gen <- aggregate(re_data1$re_gen, list(re_data1$country), FUN=mean)
+#netenergy_imports <- aggregate(re_data1$netenergy_imports, list(re_data1$country), FUN=mean)
+#re_data_ee <- data.frame(re_gen,netenergy_imports)
+#ggplot(re_data_ee, aes(x.1, x)) + 
 
 # create graph
-ggplot(re_data_ee, aes(netenergy_imports, re_gen)) + 
-  geom_point() +
+ggplot(re_data1, aes(netenergy_imports, re_gen)) + 
+  geom_point(aes(colour=country)) +
   xlab("\n Energy Intensity(%)") +
-  ylab("RE Generation (TWh)\n") +
-  ggtitle("Renewable Energy generation and Energy Intensity in 2013\n") +
-  theme_bw(base_size = 10)
-
-rm(list = c('re_data_ee'))
+  ylab("RE Generation (GWh)\n") +
+  ggtitle("Renewable Energy generation and Energy Imports\n") +
+  theme_bw(base_size = 10)+
+  guides(colour=FALSE)
 
 ```
 
-_Innovation in Renewable Energy:_ The number of patent applications in renewable energy is used as a proxy for innovation in clean energy. It is expected to be positively related to investments in renewable resources. Number of patents applications submitted to the European Patent Office for renewable energy/climate mitigation by the country is obtained from the Eurostat database.[^5]
+_Colours in the scatter plot represent countries. Legend is supressed._ 
+
+__Innovation in Renewable Energy:__ The number of patent applications in renewable energy is used as a proxy for innovation in clean energy. It is expected to be positively related to investments in renewable resources. Number of patents applications submitted to the European Patent Office for renewable energy/climate mitigation by the country is obtained from the Eurostat database.[^5]
 
 [^5]: Data available at http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=pat_ep_nrg&lang=en. 
 
@@ -234,7 +244,7 @@ re_data1$patent_ind <- cut(re_data1$patents, c(-1, 3.587, 14.950, 103.000, 1018.
 # create graph
 ggplot(re_data1, aes(patents, re_gen)) + geom_jitter() +
   xlab("\n") +
-  ylab("RE Generation (TWh)\n") +
+  ylab("RE Generation (GWh)\n") +
   ggtitle("Renewable Energy generation and innovation in EU Countries\n") +
   theme_bw(base_size = 10)
 
@@ -242,12 +252,10 @@ ggplot(re_data1, aes(patents, re_gen)) + geom_jitter() +
 
 ## 4. Research Design 
 
-To estimate the determinants of renewable energy, a pooled OLS regression is estimated. We take the log of the variable GDP per capita to reduce the skewness in the data.The estimates obtained using pooled OLS are likely to be biased as a number of unobserved factors - geographic and institutional features of the country - may also affect development of renewable energy. To control for these unobserved factors, a __fixed effects (FE)__ regression for panel data is employed.[^13]
+To estimate the determinants of renewable energy, a pooled OLS regression was first estimated. We take the log of the variable GDP per capita to reduce the skewness in the data. The estimates obtained using pooled OLS are likely to be biased as a number of unobserved factors - geographic and institutional features of the country - may also affect development of renewable energy. To control for these unobserved factors, a __fixed effects (FE)__ regression for panel data is employed.
 
 The equation that we estimate is thus equivalent to: $$ y = \beta1*oil price + \beta2*log(GDP per capita) + \beta3*green party vote + \beta4*interest rate + 
 \beta5*patents + \beta6*net energy imports $$
-
-[^13]: LM test and Hausman test confirms that fixed effects model is a better model than pooled OLS or random effects model. Refer to Diagnostics.
 
 ```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, eval=TRUE}
 
@@ -262,9 +270,12 @@ summary(m.pols)
 
 ## 5. Key Results 
 
-The results of the pooled OLS regression, shown in the table below, indicate that GDP per capita, oil price, political support and innovation are important factors in determining renewable energy growth. But the sign of the coefficient of GDP and political support is counter intuitive. 
+The results of pooled OLS regression, shown in the table below, indicate that GDP per capita, oil price, political support and innovation are important factors in determining renewable energy generation. But the sign of the coefficient of GDP and political support is counter intuitive. 
 
-We prefer the estimates of the fixed effects model for both choices of our dependent variable - (1) actual electricity generation from wind and solar __(re_gen)__ (2) percent of electricity consumption coming from wind and solar __(sw_pc_elec)__ or . The results of the fixed effects estimations are also shown in the table below. 
+We prefer the estimates of the fixed effects model[^13] for both choices of our dependent variable - (1) actual electricity generation from wind and solar __(re_gen)__ (2) percent of electricity consumption coming from wind and solar __(sw_pc_elec)__. The results of the fixed effects estimations are also shown in the table below. 
+
+[^13]: LM test and Hausman test confirms that fixed effects model is a better model than pooled OLS or random effects model. Refer to Diagnostics.
+
 ```{r, include=F, message=F, warning=FALSE, error=FALSE, echo=FALSE, eval=TRUE}
 
 ## dependent VAR 1
@@ -296,13 +307,15 @@ summary(m.fe.swpcelec)
 
 # creating coeff table
 library(stargazer)  # for summary statistics and regression tables
-stargazer(m.pols, m.fe.regen, m.fe.swpcelec, df = FALSE, covariate.labels = c('log(GDP per capita)', 'Energy Imports (% of total energy)','Interest Rate', 'Oil Price'), notes = '(1) Pooled OLS (2) Fixed Effects (3) Fixed Effects', header = F, float = F)
+stargazer(m.pols, m.fe.regen, m.fe.swpcelec, df = FALSE, covariate.labels = c('log(GDP per capita)', 'Energy Imports','Interest Rate', 'Oil Price'), notes = '(1) Pooled OLS (2) Fixed Effects (3) Fixed Effects', header = F, float = F)
 
 ```
 
-The coefficient of __oil price__ is statistically significant at 1% level of significance in both the fixed effects models. The sign on the coefficient of oil price is positive, as expected. It also has substantive significance - an increase in price of oil by $1 is associated with 0.11 percent increase in the share of solar and wind in total electricity consumption. Thus in line with the findings in the literature we find that increase in cost of conventional energy is an impetus for renewable energy development. 
+&nbsp;
 
-We also tested if the price of oil has a greater role to play in the countries of the EU that are more dependent on energy imports. Specifically we look at whether the effect of oil price on RE penetration increases with the import intensity of the country. Intuitively we would expect such an effect; a country that imports a lot of fossil fuels can be expected to react more when oil price increases. To test this we estimate a model specification with the interaction of variables 'oil price' and 'net energy imports'. The partial effect of oil price on renewable energy penetration across various levels of energy imports can be seen in the graph below. It seems that the effect of oil price does vary across energy imports but the difference is not statistically significant. 
+The coefficient of __oil price__ is statistically significant at 1% level of significance in both the fixed effects models. The sign on the coefficient of oil price is positive, as expected. It also has substantive significance - an increase in price of oil by $1 is associated with increase in the share of solar and wind in total electricity consumption by 0.11 percent points. Thus in line with the findings in the literature we find that increase in cost of conventional energy is an impetus for renewable energy development. 
+
+We also test whether the price of oil has a greater role to play in the countries of the EU that are more dependent on energy imports. Specifically we look at whether the effect of oil price on RE penetration increases with the import intensity of the country. Intuitively we would expect such an effect; a country that imports a lot of fossil fuels can be expected to react more when oil price increases. To test this we estimate a model specification with the interaction of variables 'oil price' and 'net energy imports'. The partial effect of oil price on renewable energy penetration across various levels of energy imports can be seen in the graph below. It seems that the effect of oil price does vary across energy imports but the difference is not statistically significant. 
 
 ```{r, include=FALSE, message=FALSE, warning=FALSE, error=FALSE, echo=FALSE, eval=TRUE}
 
@@ -341,11 +354,11 @@ ggplot(data = margins, aes(x = netenergy_imports, y = me, ymin = lwr, ymax = upr
 
 ```
 
-The coefficient of __GDP per capita__ is statistically significant at 1% level of significance in both the fixed effects models. The sign of the coefficient of GDP per capita is negative contrary to expectation. One reason for this might be that the dependent and independent variables seem to be trending over time, which could lead to spurious regression results. In order to de-trend the series, another FE model specification with a time trend and year dummies was also estimated. The negative sign persists in all model specifications and even on inclusion of the time trend. More work is needed to understand this counter-intuitive relationship. 
+The coefficient of __GDP per capita__ is statistically significant at 1% level of significance in both the fixed effects models. The sign of the coefficient of GDP per capita, contrary to expectations, is negative. One reason for this might be that the dependent and independent variables seem to be trending over time, which could lead to spurious regression results. In order to de-trend the series, another FE model specification with a time trend and year dummies was also estimated. The negative sign persists in all model specifications and even on inclusion of the time trend. More work is needed to understand this counter-intuitive relationship. 
 
-The coefficients on __interest rate__ and __net energy imports__ are statistically significant with the correct sign in one of the fixed effects models but insignificant at the usual levels of significance in others. The variable capturing political support has a negative sign, which is again counter intuitive. The coefficient of patents is statistically insignificant in both fixed effects models.  
+The coefficients on __interest rate__ and __net energy imports__ are statistically significant with the correct sign in one of the fixed effects models but insignificant at the usual levels of significance in the other. The variable capturing political support has a negative sign, which is again counter intuitive. But the effect is statistically insignificant. The coefficient of __patents__ is statistically insignificant in both fixed effects models.  
 
-We also extract __country specific fixed effects__ from the fixed effects model, which are comparable to country specific dummies in an OLS regression. This is done for the model specification which has share of consumption coming from wind and solar as the dependent variable. The fixed effects captures the effect of country  specific policies, regulatory environment, geographic location on RE development which are consistent over time and are not captured by the variables in the fixed effects model. We find that country specific fixed effects are statistically significant in explaining the level of RE penetration. The top ten countries with the highest fixed effects are shown in the graph below and include Denmark, Germany, Ireland and Spain. The next step would be to disentangle the effect of policy from fixed effects by creating a variable that captures the efficacy of renewable energy policies.  
+We also extract __country specific fixed effects__ from the fixed effects model, which are comparable to country specific dummies in an LSDV regression. This is done for the model specification which has renewable energy penetration as the dependent variable. The fixed effects capture the effect of country  specific policies, regulatory environment, geographic location on RE development which are consistent over time and are not captured by the variables in the fixed effects model. We find that country specific fixed effects are statistically significant in explaining the level of RE penetration. The top ten countries with the highest fixed effects are shown in the graph below and include Denmark, Germany, Ireland and Spain. The next step would be to disentangle the effect of policy from fixed effects by creating a variable that captures the efficacy of renewable energy policies.  
 
 ```{r, include=TRUE, message=F, warning=FALSE, error=FALSE, echo=FALSE, eval=TRUE}
 
@@ -399,9 +412,15 @@ c3 <- coeftest(m.fe.swpcelec, vcovHC(m.fe.swpcelec, method = "arellano")) # Hete
 
 ```
 
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
 ## 7. Conclusion 
 
-Our analysis of the determinants of renewable energy in EU countries using panel data and a fixed effect models reveals that cost of alternate energy is the single most important variable in hastening a shift towards wind and solar energy generation. We also find a surprising statistically significant negative relationship between renewable energy development and per capita income in European countries. The effect was consistent across model specifications and needs to be investigated further. On the other hand some model specifications confirm findings in the literature that technology development provides an important impetus for shift towards renewables. We also find statistically significant country fixed effects which in-part captures favourable policy incentives for renewable energy development. 
+Our analysis of the determinants of renewable energy in EU countries using panel data and a fixed effect models reveals that cost of alternate energy is an important variable in hastening a shift towards wind and solar energy generation. We also find a surprising statistically significant negative relationship between renewable energy development and per capita income in European countries. The effect was consistent across model specifications and needs to be investigated further. On the other hand some model specifications confirm findings in the literature that RE technology development and lower rates of interest provide impetus for shift towards renewables. We also find statistically significant country fixed effects which in-part captures favourable policy incentives for renewable energy development. 
 
 ## 8. References
 
