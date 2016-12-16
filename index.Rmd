@@ -1,5 +1,5 @@
 ---
-title: "Renewable Energy: What factors explain the adoption of solar and wind power in EU countries?"
+title: "Renewable Energy: What factors explain the adoption of renewable energy in EU countries?"
 author: Camila & Tarun
 output: 
   flexdashboard::flex_dashboard:
@@ -16,12 +16,14 @@ One potential way of removing the impact of greenhouse gas emission is mitigatio
 
 The shift to cleaner forms of energy production through the adoption of renewable energy sources is a key mitigation strategy for countries like India and China.
 
-What about the European countries? Are they also switching to renewable energy? What factors explain the adoption of renewables - wind and solar - in European countries?
+What about the European countries? Are they also switching to renewable energy? What factors explain the adoption of renewables - wind and solar - in these countries?
 
-Row {data-height=360}
------------------------
+Row {data-height=500 .tabset .tabset-fade}
+------------------------------
 
-###What percentage of total electricity consumption in EU countries can be attributed to Renewable Energy?
+###Renewable Energy Penetration
+__What percentage of total electricity consumption in EU countries is generated using wind and solar energy?__  
+Denmark is one of the 'greenest' country in Europe - at least when it comes to solar and wind. About 37% of its electricity needs are met through wind and solar generation. But Spain, Italy, Germany and Greece have solar and wind penetration of more than 15%, which was unthinkable even a decade ago. 
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
 
@@ -51,15 +53,85 @@ re_map <- gvisGeoChart(re_data_map, locationvar = 'country',
                         colors = "['#f7fcb9', '#31a354']",
                         region ="150"
                           ))
+
 print(re_map, tag = 'chart')
+
 ```
 
-Row {.tabset .tabset-fade}
+###Solar Penetration
+
+The sunny countries in __southern Europe - Italy and Greece__ - rely more on solar power than any other country. About 8% of electricity in consumed in these countries comes from solar. But __Germany and Spain__ are not far behind. In fact in terms of actual generation Germany takes the clear lead. _(see graphics below)_ 
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
+
+#creating var for solar and wind gen as percent of total elec consumption
+re_data1$s_pc_elec <- re_data1$solar_gen/re_data1$elec_total*100 
+re_data_map <- re_data1[which(re_data1$year == "2013"),]
+
+library(googleVis)
+# Plot
+re_map_s <- gvisGeoChart(re_data_map, locationvar = 'country',
+                      colorvar = 's_pc_elec',
+                      options = list(
+                        colors = "['#f7fcb9', '#31a354']",
+                        region ="150"
+                          ))
+
+print(re_map_s, tag = 'chart')
+
+```
+
+###Wind Penetration
+
+__Denmark__ is the clear leader in wind energy. But the windy coasts of __Spain and Portugal__ are catching up fast - about 25% of electricity in these countries now comes from wind! 
+
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', cache=TRUE}
+
+#creating var for solar and wind gen as percent of total elec consumption
+re_data1$w_pc_elec <- re_data1$wind_gen/re_data1$elec_total*100 
+re_data_map <- re_data1[which(re_data1$year == "2013"),]
+
+library(googleVis)
+# Plot
+re_map_w <- gvisGeoChart(re_data_map, locationvar = 'country',
+                      colorvar = 'w_pc_elec',
+                      options = list(
+                        colors = "['#f7fcb9', '#31a354']",
+                        region ="150"
+                          ))
+
+print(re_map_w, tag = 'chart')
+
+```
+
+Row {data-height=550 .tabset .tabset-fade}
 ------------------------------
 
-###Wind Power Trend 
+### How do different countries perform over time? 
+Denmark might have the highest RE penetration but it is also small. __Germany and Spain__ are the largest markets for wind and solar power - they have high RE penetration and high absolute generation as well. 
+
+_... See how things evolved in Europe over the last decade by clicking on the 'play' or moving the time slider located at the the bottom. You can select the factors that may impact the uptake of RE on the left side. On the right, check the countries to highlight a country._ 
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
+
+library(googleVis)
+
+myState <- '\n{"colorOption":"6","time":"2013","sizeOption":"6","xZoomedDataMax":26,"xZoomedIn":false,"iconKeySettings":[{"trailStart":"2013","key":{"dim0":"Italy"}},{"trailStart":"2013","key":{"dim0":"Denmark"}},{"trailStart":"2013","key":{"dim0":"United Kingdom"}},{"trailStart":"2013","key":{"dim0":"Spain"}},{"trailStart":"2013","key":{"dim0":"Germany"}}],"xLambda":1,"xZoomedDataMin":0,"iconType":"BUBBLE","yZoomedIn":false,"yAxisOption":"11","xAxisOption":"_ALPHABETICAL","orderedByY":false,"yZoomedDataMax":37.29416288,"yZoomedDataMin":0,"showTrails":true,"uniColorForNonSelected":false,"nonSelectedAlpha":0.4,"dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"yLambda":1,"orderedByX":false,"duration":{"multiplier":1,"timeUnit":"Y"}}\n'
+
+re_data1$year <- as.numeric(re_data1$year)
+
+M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var", options=list(width=650, height=350, state=myState))
+
+print(M,  tag = 'chart')
+
+```
+
+__Click on the tabs to download solar and wind generation trends (2005-13) in top 10 electricity markets in Europe__
+
+###Wind Power Trends
+
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height= 4, fig.width=6}
 
 library(ggplot2)
 library(dplyr)
@@ -79,17 +151,17 @@ wind_chart <- ggplot(data = na.omit(re_wind_top10)) +
   geom_area(position = "stack") + 
   scale_color_manual(values = Colours) +
   xlab("\nYear") +
-  ylab("Wind Energy Generation(TWh)\n") +
-  ggtitle("\nWind Energy Generation in ten largest wind energy markets in Europe\n") +
+  ylab("(GWh)\n") +
+  ggtitle("Wind electricity in top 10 markets in the EU\n") +
   theme_bw(base_size = 10)
 
 ggplotly(wind_chart)
 
 ```
 
-###Solar Power Trend
+###Solar Power Trends
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
+```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis', fig.height= 4, fig.width=6}
 
 library(ggplot2)
 library(dplyr)
@@ -100,7 +172,7 @@ re_data1 <- re_data1[order(re_data1$year,re_data1$solar_gen),] #arranging data
 countries10 <- tail(re_data1,10)[1] %>% as.matrix() %>% as.character() %>% paste(collapse = "|") #finding top10
 re_solar_top10  <- filter(re_data, grepl(countries10, country)) #selecting top 10 countries by generation 
 
-#create graph of Wind Generation
+#create graph of solar Generation
 Colours <- c('#543005','#8c510a','#bf812d','#dfc27d','#f6e8c3','#c7eae5','#80cdc1',
              '#35978f','#01665e','#003c30') # assigning colour pallette
 
@@ -109,35 +181,20 @@ solar_chart <- ggplot(data = na.omit(re_solar_top10)) +
   geom_area(position = "stack") + 
   scale_color_manual(values = Colours) +
   xlab("\nYear") +
-  ylab("Solar Energy Generation (TWh)\n") +
-  ggtitle("\nSolar Energy Generation in ten largest solar energy markets in Europe\n") +
+  ylab("(GWh)\n") +
+  ggtitle("Solar electricity in top 10 markets in the EU\n") +
   theme_bw(base_size = 10)
 
 ggplotly(solar_chart)
 ```
 
-Row 
+
+Row{data-height=300}
 ----------------------------
 
-### From the current levels of electricity consumption in EU...
-...Select on the left side the factors that may impact the uptake of RE. On the right, check the countries for further info. See how things evolve by clicking on the play bottom or moving the time slider located at the the bottom.
+###Let there be expensive oil! 
 
-```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
-
-library(googleVis)
-
-myState <- '\n{"time":"2013","orderedByX":true,"xZoomedDataMax":26,"nonSelectedAlpha":0.4,"sizeOption":"_UNISIZE","duration":{"multiplier":1,"timeUnit":"Y"},"uniColorForNonSelected":false,"iconKeySettings":[],"xZoomedDataMin":0,"iconType":"VBAR","yZoomedIn":false,"xZoomedIn":false,"xLambda":1,"showTrails":false,"xAxisOption":"11","yZoomedDataMax":40,"yZoomedDataMin":0,"orderedByY":false,"yAxisOption":"11","colorOption":"_UNIQUE_COLOR","dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"yLambda":1}\n'
-
-re_data1$year <- as.numeric(re_data1$year)
-M <-  gvisMotionChart(data=re_data1, idvar="country", timevar="year", chartid="re_all_var", options=list(width=650, height=350, state=myState))
-print(M,  tag = 'chart')
-
-```
-
-Row
-----------------------------
-
-###Does RE generation follow changes in oil prices?
+Over the last decade as oil prices increased, it led to increased uptake of solar and wind energy in EU countries. In fact, our statistical analysis shows that high prices of oil are one of the most important variables in facilitating development of renewable energy in Europe. 
 
 ```{r, include=T, message=F, warning=FALSE, error=FALSE, echo=FALSE, type = 'html', results='asis'}
 
