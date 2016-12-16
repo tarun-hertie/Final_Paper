@@ -31,7 +31,7 @@ energy, have a positive and significant impact on green investment.
 
 The @imf2011green study was replicated by @ilas2014macroeconomic on an updated dataset. The paper reaffirmed that GDP per capita has a positive impact over investments in green technologies, while GDP growth and variables related to human development capacity as well as technological progress were not found to be statistically significant.
 
-This papers seeks to carry out an in depth analysis of the determinants of renewable energy across countries of the European Union. We follow in the footsteps of @ilas2014macroeconomic, but include a wider set of EU countries. The analysis is carried on data from 28 EU countries from 2005 to 2013. The countries of the EU are similar in stage of economic development, human capital development and renewable energy policies as compared to a world wide set. Factors such cost of conventional energy, level of innovation and political support for renewables might be expected to play a stronger role in explaining the differences in RE development across EU countries. 
+This papers seeks to carry out an in depth analysis of the determinants of renewable energy across countries of the European Union. We follow in the footsteps of @ilas2014macroeconomic, but include a wider set of EU countries. The analysis is carried on data from 26 EU countries from 2005 to 2013. The countries of the EU are similar in stage of economic development, human capital development and renewable energy policies as compared to a world wide set. Factors such cost of conventional energy, level of innovation and political support for renewables might be expected to play a stronger role in explaining the differences in RE development across EU countries. 
 
 ## 3. Data sources and description
 
@@ -58,12 +58,12 @@ re_data1$sw_pc_elec <- re_data1$re_gen/re_data1$elec_total*100
 
 ### Dependent variable
 
-We use __electricity generation__ from Renewable Energy Sources (RES), namely wind and solar (photo-voltaic), to operationalize the variable of our interest - renewable energy investments in the economy. Increase in renewable energy generation is expected to be correlated strongly with the underlying generation capacity and investments in renewable energy and is in line with the approach followed by @bird2005policies and @carley2009state. The data on electricity generated from wind and solar energy (measured in Gigawatt-hour) is taken from the Eurostat database.[^1][^1a] 
+We use __electricity generation__ from Renewable Energy Sources (RES), namely wind and solar (photo-voltaic), to operationalize the variable of our interest - renewable energy development. Increase in renewable energy generation is expected to be correlated strongly with the underlying generation capacity and investments in renewable energy and is in line with the approach followed by @bird2005policies and @carley2009state. The data on electricity generated from wind and solar energy (measured in Gigawatt-hour) was obtained from the Eurostat database.[^1][^1a] We then create the variable __re_gen__ which captures the sum of wind and solar generation in a given year. 
 
 [^1]: Data available at http://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do. Select wind and solar photo-voltaic. 
 [^1a]: The raw data downloaded from Eurostat is stored in the repository on Github and is accessible.  
 
-Electricity generation from wind has been increasing every year in the last decade or so in EU countries. The graph below shows wind energy generation in the leading ten wind energy generating markets in EU from 2005 to 2013. Germany has been a leader in wind energy development, clearly seen in its large share of overall wind generation. Apart from Germany, Spain and increasingly UK and France are also important players in this market. 
+The graph below shows wind energy generation in the leading ten wind energy generating markets in EU from 2005 to 2013. Electricity generation from wind has been increasing every year in the last decade or so in EU countries. Germany has been a leader in wind energy development, clearly seen in its large share of overall wind generation. Apart from Germany, Spain and increasingly UK and France are also important players in this market. 
 &nbsp;
 
 &nbsp;
@@ -133,7 +133,7 @@ rm(list = c("re_solar_top10", "countries10","p","countries","Colours"))
 
 &nbsp;
 
-We also estimate an alternative model specification that uses __renewable energy penetration__ as the dependent variable. This follows the approach adopted by marques2010motivations. In this paper renewable energy penetration is captured by calculating the share of total electricity consumption coming from wind and solar energy. Apart from helping us test the robustness of our model, the alternate specification has the added advantage that it allows us to meaningfully interpret country specific fixed effects. This variable is created using data from Eurostat database[^2] on total electricity consumption in each country and electricity generated from wind and solar (photo-voltaic) energy.
+In order to test the robustness of our model we also estimate an alternative model specification that uses __renewable energy penetration__ as the dependent variable. This follows the approach adopted by marques2010motivations. The alternate specification has the added advantage that it allows us to meaningfully interpret country specific fixed effects. In this paper renewable energy penetration is captured by calculating the share of total electricity consumption coming from wind and solar energy. This variable is created using data from Eurostat database[^2] on total electricity consumption in each country and electricity generated from wind and solar (photo-voltaic) energy.
 
 [^2]: Data available at http://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do
 
@@ -193,7 +193,7 @@ ggplot(data = re_data1, aes(GDP_capita,re_gen)) +
 
 ```
 
-_Political support for renewable energy:_ The percentage vote-share of the green parties in the most recent elections is taken as a measure to gauge the public support for renewable energy. We derive this data from the previous work done by @abouchadi2016.[^8] We expect that higher public support for renewables, as demonstrated by higher vote-shares of green parties, would be positively related with the level of renewable energy penetration.
+_Political support for renewable energy:_ The percentage vote-share of the green parties in the most recent elections is taken as a measure to gauge the public support for renewable energy. We derive this data from the previous work done by @abouchadi2016.[^8] This article investigates the impact of niche party success on the policy agendas of mainstream parties. The authors do so by using the data on vote-share of the green parties in elections in each country. We converted the data to give the information about how much support did green party have in a particular year (for example, if there was an election in 2009 and then in 2013, then between 2009 and 2013, we take the value as support being equal to that in 2009 and thereafter the value of support in 2013). We use this data on vote-shares to generate a proxy for political support for renewables. Higher public support for renewables, as demonstrated by higher vote-shares of green parties, is expected to be positively related with the level of renewable energy penetration. 
 
 [^8]: Data available at: https://www.cambridge.org/core/journals/british-journal-of-political-science/article/div-classtitleniche-party-success-and-mainstream-party-policy-shifts-how-green-and-radical-right-parties-differ-in-their-impactdiv/AEF265EED2CAA81C35A3808F47F5908A#fndtn-supplementary-materials. 
 
@@ -400,6 +400,8 @@ c3 <- coeftest(m.fe.swpcelec, vcovHC(m.fe.swpcelec, method = "arellano")) # Hete
 ```
 
 ## 7. Conclusion 
+
+Our analysis of the determinants of renewable energy in EU countries using panel data and a fixed effect models reveals that cost of alternate energy is the single most important variable in hastening a shift towards wind and solar energy generation. We also find a surprising statistically significant negative relationship between renewable energy development and per capita income in European countries. The effect was consistent across model specifications and needs to be investigated further. On the other hand some model specifications confirm findings in the literature that technology development provides an important impetus for shift towards renewables. We also find statistically significant country fixed effects which in-part captures favourable policy incentives for renewable energy development. 
 
 ## 8. References
 
