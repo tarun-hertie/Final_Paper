@@ -1,5 +1,5 @@
 ---
-title: "Renewable Energy: What factors explain the adoption of renewable energy in EU countries?"
+title: "Determinants of Renewable Energy in EU"
 author: Camila & Tarun
 output: 
   flexdashboard::flex_dashboard:
@@ -204,6 +204,7 @@ Over the last decade as oil prices increased, it led to increased uptake of sola
 re_data2 <- aggregate(re_data1$re_gen, list(re_data1$year), FUN=sum)
 names(re_data2)[names(re_data2) == 'x'] <- 're_gen_sum'
 names(re_data2)[names(re_data2) == 'Group.1'] <- 'year'
+
 
 #Percentage changes in RE generation from 2005 until 2013
 re_data2$re_gen_pct <- c(NA, 17.93, 27.53, 17.38, 15.80, 16.80, 30.69, 21.54, 16.15)
